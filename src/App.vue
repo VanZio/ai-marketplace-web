@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="sidebar">
+    <div class="sidebar" :class="{ 'sidebar-collapsed': isCollapsed }">
       <div class="logo">
         <img src="./assets/logo.jpeg" alt="Logo" />
       </div>
@@ -10,18 +10,23 @@
         <router-link v-if="isLoggedIn && userData.type === 'manager'" to="/manager" class="nav-link">Manager Dashboard</router-link>
         <router-link v-if="!isLoggedIn" to="/login" class="nav-link">Login</router-link>
         <router-link v-if="!isLoggedIn" to="/register" class="nav-link">Register</router-link>
-        <div class="user mt-auto">
-          <span v-if="isLoggedIn" class="nav-link">User: {{ userData.username }}</span>
-          <span v-if="isLoggedIn" class="nav-link">Role: {{ userData.type }}</span>
-          <span v-if="isLoggedIn" class="nav-link" @click="logout">Logout</span>
+        <div class="user mt-3" v-if="isLoggedIn">
+          <div class="user-info text-center">
+            <p class="mb-1"><strong>{{ userData.username }}</strong></p>
+            <p class="mb-1"><small> Role: {{ userData.type }}</small></p>
+            <button class="btn btn-sm btn-outline-light mt-2" @click="logout">Logout</button>
+          </div>
         </div>
-        <div class="weather mt-4" v-if="weather">
-          <h3>Current Weather</h3>
+        <div class="weather mt-3 text-center" v-if="weather">
+          <h6>Current Weather</h6>
           <p>{{ weather.name }}: {{ weather.main.temp }}°C, {{ weather.weather[0].description }}</p>
         </div>
       </nav>
     </div>
-    <div class="content">
+    <button class="toggle-button" @click="toggleSidebar">
+      ☰
+    </button>
+    <div class="content" :class="{ 'content-expanded': isCollapsed }">
       <router-view/>
     </div>
   </div>
@@ -35,7 +40,8 @@ export default {
     return {
       isLoggedIn: false,
       userData: {},
-      weather: null
+      weather: null,
+      isCollapsed: false
     };
   },
   mounted() {
@@ -68,6 +74,9 @@ export default {
         .catch(error => {
           console.error('Error fetching weather data:', error);
         });
+    },
+    toggleSidebar() {
+      this.isCollapsed = !this.isCollapsed;
     }
   },
   watch: {
