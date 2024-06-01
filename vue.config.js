@@ -6,10 +6,10 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:8082', // backend server URL
+        target: 'https://ai-marketplace-backend.onrender.com', // backend server URL
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { 'http://localhost:8082/api': '' },
+        pathRewrite: { 'https://ai-marketplace-backend.onrender.com/api': '' },
       },
     },
   },
