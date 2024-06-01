@@ -23,7 +23,7 @@ export default {
   methods: {
     fetchUsers() {
       axios
-        .get('/api/users')
+        .get('https://ai-marketplace-backend.onrender.com/api/users')
         .then((response) => {
           this.users = response.data;
         })
