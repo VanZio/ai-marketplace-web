@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     fetchProducts() {
-      axios.get('/api/products')
+      axios.get('https://ai-marketplace-backend.onrender.com/api/products')
         .then(response => {
           this.products = response.data;
         })
@@ -130,7 +130,7 @@ export default {
         });
     },
     likeProduct(productId) {
-      axios.put(`/api/products/${productId}/like`)
+      axios.put(`https://ai-marketplace-backend.onrender.com/api/products/${productId}/like`)
         .then(() => {
           const product = this.products.find(p => p.id === productId);
           if (product) {

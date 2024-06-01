@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     fetchProducts() {
-      axios.get('/api/products')
+      axios.get('https://ai-marketplace-backend.onrender.com/api/products')
         .then(response => {
           this.products = response.data;
         })
@@ -126,7 +126,7 @@ export default {
         });
     },
     addProduct() {
-      axios.post('/api/products', this.newProduct)
+      axios.post('https://ai-marketplace-backend.onrender.com/api/products', this.newProduct)
         .then(() => {
           console.log('Product added successfully');
           this.fetchProducts();
@@ -139,7 +139,7 @@ export default {
     },
     deleteProduct() {
       if (this.selectedProductId) {
-        axios.delete(`/api/products/${this.selectedProductId}`)
+        axios.delete(`https://ai-marketplace-backend.onrender.com/api/products/${this.selectedProductId}`)
           .then(() => {
             console.log('Product deleted successfully');
             this.fetchProducts();
@@ -153,7 +153,7 @@ export default {
     },
     updateProduct() {
       if (this.selectedProductId) {
-        axios.put(`/api/products/${this.selectedProductId}`, this.updatedProduct)
+        axios.put(`https://ai-marketplace-backend.onrender.com/api/products/${this.selectedProductId}`, this.updatedProduct)
           .then(() => {
             console.log('Product updated successfully');
             this.fetchProducts();

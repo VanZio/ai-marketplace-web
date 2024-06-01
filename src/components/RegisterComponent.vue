@@ -56,7 +56,7 @@ export default {
         return;
       }
 
-      axios.post('/api/register', {
+      axios.post('https://ai-marketplace-backend.onrender.com/api/register', {
         email: this.email,
         username: this.username,
         password: this.password
